@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-dotenv
+langchain
+langchain-groq
+langchain-community
+chromadb
+unstructured
+fake-useragent
+requests
+beautifulsoup4
+uvicorn[standard]
