@@ -10,7 +10,6 @@ from config import CHROMA_DIR, COLLECTION_NAME
 from langchain_community.document_loaders import WebBaseLoader
 
 ua = UserAgent()
-# client = PersistentClient(path=CHROMA_DIR)
 from chromadb import Client
 client = Client()
 
@@ -24,8 +23,6 @@ def process_urls(urls):
     collection = client.get_or_create_collection(COLLECTION_NAME)
 
     loader = WebBaseLoader(
-        # urls=urls,
-        # headers={"User-Agent": ua.random}
         web_paths=urls,
     )
     data = loader.load()
@@ -46,14 +43,13 @@ def ask_question(query: str):
     vectorstore = Chroma(
         client=client,
         collection_name=COLLECTION_NAME,
-        # persist_directory=CHROMA_DIR
+       
     )
 
     retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
 
     llm = ChatGroq(
         temperature=0.5,
-        # groq_api_key=GROQ_API_KEY,
         model_name="llama-3.3-70b-versatile"
     )
 
