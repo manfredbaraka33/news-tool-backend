@@ -6,7 +6,7 @@ from langchain_chroma import Chroma
 from langchain.chains import RetrievalQA
 from langchain_groq import ChatGroq
 from chromadb import PersistentClient
-from config import GROQ_API_KEY, CHROMA_DIR, COLLECTION_NAME
+from config import CHROMA_DIR, COLLECTION_NAME
 from langchain_community.document_loaders import WebBaseLoader
 
 ua = UserAgent()
@@ -53,7 +53,7 @@ def ask_question(query: str):
 
     llm = ChatGroq(
         temperature=0.5,
-        groq_api_key=GROQ_API_KEY,
+        # groq_api_key=GROQ_API_KEY,
         model_name="llama-3.3-70b-versatile"
     )
 
