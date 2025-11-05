@@ -42,8 +42,8 @@ def process_urls(urls):
 
 def ask_question(query: str):
     # Instantiate the embedding model
-    embeddings = HuggingFaceBgeEmbeddings(
-        model_name="BAAI/bge-small-en-v1.5" # A robust, compact model
+    embeddings = SentenceTransformerEmbeddings(
+        model_name="all-MiniLM-L6-v2"
     )
     vectorstore = Chroma(
         client=client,
