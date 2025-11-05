@@ -10,3 +10,4 @@ fake-useragent
 requests
 beautifulsoup4
 uvicorn[standard]
+langchain-chroma
