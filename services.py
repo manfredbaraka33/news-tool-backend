@@ -3,7 +3,7 @@ from fake_useragent import UserAgent
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
-from langchain.chains import RetrievalQA
+from langchain_community.chains import RetrievalQA
 from langchain_groq import ChatGroq
 from chromadb import PersistentClient
 from config import GROQ_API_KEY, CHROMA_DIR, COLLECTION_NAME
