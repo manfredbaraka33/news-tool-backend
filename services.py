@@ -10,7 +10,9 @@ from config import GROQ_API_KEY, CHROMA_DIR, COLLECTION_NAME
 from langchain_community.document_loaders import WebBaseLoader
 
 ua = UserAgent()
-client = PersistentClient(path=CHROMA_DIR)
+# client = PersistentClient(path=CHROMA_DIR)
+from chromadb import Client
+client = Client()
 
 def process_urls(urls):
     # Create collection fresh
@@ -44,7 +46,7 @@ def ask_question(query: str):
     vectorstore = Chroma(
         client=client,
         collection_name=COLLECTION_NAME,
-        persist_directory=CHROMA_DIR
+        # persist_directory=CHROMA_DIR
     )
 
     retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
