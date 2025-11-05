@@ -7,6 +7,7 @@ from langchain.chains import RetrievalQA
 from langchain_groq import ChatGroq
 from chromadb import PersistentClient
 from config import GROQ_API_KEY, CHROMA_DIR, COLLECTION_NAME
+from langchain_community.document_loaders import WebBaseLoader
 
 ua = UserAgent()
 client = PersistentClient(path=CHROMA_DIR)
@@ -20,9 +21,10 @@ def process_urls(urls):
 
     collection = client.get_or_create_collection(COLLECTION_NAME)
 
-    loader = UnstructuredURLLoader(
-        urls=urls,
-        headers={"User-Agent": ua.random}
+    loader = WebBaseLoader(
+        # urls=urls,
+        # headers={"User-Agent": ua.random}
+        web_paths=urls,
     )
     data = loader.load()
 
