@@ -11,3 +11,4 @@ requests
 beautifulsoup4
 uvicorn[standard]
 langchain-chroma
+sentence_transformers
