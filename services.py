@@ -8,6 +8,7 @@ from langchain_groq import ChatGroq
 from chromadb import PersistentClient
 from config import CHROMA_DIR, COLLECTION_NAME
 from langchain_community.document_loaders import WebBaseLoader
+from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 
 ua = UserAgent()
 from chromadb import Client
@@ -40,9 +41,14 @@ def process_urls(urls):
     return len(docs)
 
 def ask_question(query: str):
+    # Instantiate the embedding model
+    embeddings = HuggingFaceBgeEmbeddings(
+        model_name="BAAI/bge-small-en-v1.5" # A robust, compact model
+    )
     vectorstore = Chroma(
         client=client,
         collection_name=COLLECTION_NAME,
+        embedding_function=embeddings
        
     )
 
