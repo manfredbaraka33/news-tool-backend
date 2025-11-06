@@ -8,7 +8,7 @@ from langchain_groq import ChatGroq
 from chromadb import PersistentClient
 from config import CHROMA_DIR, COLLECTION_NAME
 from langchain_community.document_loaders import WebBaseLoader
-from langchain_community.embeddings import HuggingFaceBgeEmbeddings
+from langchain_cohere import CohereEmbeddings
 
 ua = UserAgent()
 from chromadb import Client
@@ -41,15 +41,17 @@ def process_urls(urls):
     return len(docs)
 
 def ask_question(query: str):
-    # Instantiate the embedding model
-    embeddings = SentenceTransformerEmbeddings(
-        model_name="all-MiniLM-L6-v2"
+
+    # 1. Instantiate the remote Cohere model
+    embeddings = CohereEmbeddings(
+        model="embed-english-light-v3.0" 
+        # Model is a good balance of speed/quality for a free tier
     )
+
     vectorstore = Chroma(
         client=client,
         collection_name=COLLECTION_NAME,
-        embedding_function=embeddings
-       
+        embedding_function=embeddings 
     )
 
     retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
